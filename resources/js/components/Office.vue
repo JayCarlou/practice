@@ -1,67 +1,73 @@
 <template>
-    <div>
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+  <div>
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
 
-            <!-- Modal content-->
-            
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- <p>Some text in the modal. {{data}}</p> -->
-                    <li v-for="item in ar">
-                        {{item.code}}
-                        <a v-bind:href="'/hello/'+ item.id">
-                            <button type="button" class="btn btn-danger btn-sm">
-                                <i class="fa fa-btn fa-times"></i>
-                            </button>
-                        </a>
-                    </li>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            </div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{action.toUpperCase()}}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <!-- <p>Some text in the modal. {{data}}</p> -->
+            <!-- <li :key="item.id" v-for="item in ar">
+              {{item.code}}
+              <a v-bind:href="'/hello/'+ item.id">
+                <button type="button" class="btn btn-danger btn-sm">
+                  <i class="fa fa-btn fa-times"></i>
+                </button>
+              </a>
+            </li>-->
+            <form :action="`office/${action}`" method="GET">
+              <input type="hidden" v-model="office.id" class="form-control" name="id" />
+              <div class="form-group">
+                <label for="code">Code</label>
+                <input
+                  type="number"
+                  v-model="office.code"
+                  class="form-control"
+                  name="code"
+                  id="code"
+                  :disabled="action == 'delete'"
+                />
+              </div>
+              <div class="form-group">
+                <label for="office_name">Office</label>
+                <input
+                  type="text"
+                  v-model="office.office_name"
+                  class="form-control"
+                  id="office_name"
+                  name="office_name"
+                  :disabled="action == 'delete'"
+                />
+              </div>
+              <button
+                v-if="action == 'edit'"
+                type="submit"
+                class="btn btn-primary float-right"
+              >Submit</button>
+              <button v-else type="submit" class="btn btn-danger float-right">Delete</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        props: ["data", "array","did"],
-            data() {
-            return {
-                // office : {},
-                // Create a new form instance
-                // form: new Form({
-                //     id : '',
-                //     code: '',
-                //     office_name: '',
-                // })
-                ar: this.getNewArray(JSON.parse(this.array), this.did)
-                //ar: JSON.parse(this.array),
-            };
-        },
-        methods: {
-            // or as a method
-            getNewArray(arr, id) {
-                return arr.filter(item => item.id == id);
-            }
-        },
-        computed: {
-            // ar() {
-            //     let array = JSON.parse(this.array);
-            //     console.log(array);
-            //     return array.filter(item => item.id == 9);
-            // }
-        }
-    }
+export default {
+  props: ["office", "action"],
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
+  computed: {}
+};
 </script>
 
 <style scoped>
-    
 </style>

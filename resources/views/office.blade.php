@@ -3,9 +3,9 @@
 @section('title', 'office')
 
 @section('content')
-    <div id="app">
-        <office></office>
-    </div>
+<div id="app">
+    <office :title="'{!!$title !!}'"></office>
+</div>
 
-    <script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 @endsection

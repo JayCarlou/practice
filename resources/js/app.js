@@ -32,4 +32,18 @@ Vue.component('office', require('./components/Office.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data() {
+        return {
+            office: "",
+            action: "",
+        }
+    },
+    methods: {
+        officeClicked(office, action) {
+            console.log(office, action);
+            this.office = office;
+            this.action = action;
+            $('#myModal').modal('show')
+        },
+    }
 });

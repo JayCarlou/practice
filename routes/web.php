@@ -14,19 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome',[
+    return view('welcome', [
         'title' => "Page 1"
     ]);
 });
 
 Route::get('/page', function () {
-    return view('page',
+    return view(
+        'page',
         [
             'title' => "Page 2 - A little about the Author",
             'author' => json_encode([
-                    "name" => "Fisayo Afolayan",
-                    "role" => "Software Enginner",
-                    "code" => "Always keeping it clean"
+                "name" => "Fisayo Afolayan",
+                "role" => "Software Enginner",
+                "code" => "Always keeping it clean"
             ])
         ]
     );
@@ -38,15 +39,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/office', 'SettingsController@office')->name('office');
 
 Route::get('/office', function () {
-    return view('office',[
+    return view('office', [
         'title' => "Page 1"
     ]);
 });
 
-Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
-{
+
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function () {
+
     Route::match(['get', 'post'], '/adminOnlyPage/', 'HomeController@admin');
     //Route::get('/adminOnlyPage','HomeController@admin');
 });
+
+// delete edit office
+Route::get('/office/edit', 'HomeController@edit');
+Route::get('/office/delete', 'HomeController@delete');
 
 Route::get('/unauthorized', 'HomeController@unauthorized')->name('unauthorized');

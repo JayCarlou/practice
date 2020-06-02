@@ -1940,35 +1940,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["data", "array", "did"],
+  props: ["office", "action"],
   data: function data() {
-    return {
-      // office : {},
-      // Create a new form instance
-      // form: new Form({
-      //     id : '',
-      //     code: '',
-      //     office_name: '',
-      // })
-      ar: this.getNewArray(JSON.parse(this.array), this.did) //ar: JSON.parse(this.array),
-
-    };
+    return {};
   },
-  methods: {
-    // or as a method
-    getNewArray: function getNewArray(arr, id) {
-      return arr.filter(function (item) {
-        return item.id == id;
-      });
-    }
-  },
-  computed: {// ar() {
-    //     let array = JSON.parse(this.array);
-    //     console.log(array);
-    //     return array.filter(item => item.id == 9);
-    // }
-  }
+  created: function created() {},
+  methods: {},
+  computed: {}
 });
 
 /***/ }),
@@ -37523,75 +37529,143 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "modal-header" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v(_vm._s(_vm.action.toUpperCase()))
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("×")]
+              )
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-body" },
-              _vm._l(_vm.ar, function(item) {
-                return _c("li", [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item.code) +
-                      "\n                    "
-                  ),
-                  _c("a", { attrs: { href: "/hello/" + item.id } }, [
-                    _vm._m(1, true)
-                  ])
-                ])
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _vm._m(2)
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                { attrs: { action: "office/" + _vm.action, method: "GET" } },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.office.id,
+                        expression: "office.id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "hidden", name: "id" },
+                    domProps: { value: _vm.office.id },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.office, "id", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "code" } }, [_vm._v("Code")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.office.code,
+                          expression: "office.code"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        name: "code",
+                        id: "code",
+                        disabled: _vm.action == "delete"
+                      },
+                      domProps: { value: _vm.office.code },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.office, "code", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "office_name" } }, [
+                      _vm._v("Office")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.office.office_name,
+                          expression: "office.office_name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "office_name",
+                        name: "office_name",
+                        disabled: _vm.action == "delete"
+                      },
+                      domProps: { value: _vm.office.office_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.office,
+                            "office_name",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.action == "edit"
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-right",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger float-right",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Delete")]
+                      )
+                ]
+              )
+            ])
           ])
         ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("×")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fa fa-btn fa-times" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49796,7 +49870,21 @@ Vue.component('office', __webpack_require__(/*! ./components/Office.vue */ "./re
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {
+      office: "",
+      action: ""
+    };
+  },
+  methods: {
+    officeClicked: function officeClicked(office, action) {
+      console.log(office, action);
+      this.office = office;
+      this.action = action;
+      $('#myModal').modal('show');
+    }
+  }
 });
 
 /***/ }),
@@ -49933,8 +50021,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\practice\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\practice\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Desktop\practice\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Desktop\practice\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
