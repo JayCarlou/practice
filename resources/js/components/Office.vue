@@ -7,7 +7,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">{{action.toUpperCase()}}</h5>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button @click="reset" type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <!-- <p>Some text in the modal. {{data}}</p> -->
@@ -30,6 +30,8 @@
                   name="code"
                   id="code"
                   :disabled="action == 'delete'"
+                  required
+                  autocomplete="off"
                 />
               </div>
               <div class="form-group">
@@ -41,6 +43,8 @@
                   id="office_name"
                   name="office_name"
                   :disabled="action == 'delete'"
+                  required
+                  autocomplete="off"
                 />
               </div>
               <button
@@ -48,7 +52,12 @@
                 type="submit"
                 class="btn btn-primary float-right"
               >Submit</button>
-              <button v-else type="submit" class="btn btn-danger float-right">Delete</button>
+              <button
+                v-else-if="action == 'delete'"
+                type="submit"
+                class="btn btn-danger float-right"
+              >Delete</button>
+              <button v-else type="submit" class="btn btn-primary float-right">Add</button>
             </form>
           </div>
         </div>
@@ -59,7 +68,7 @@
 
 <script>
 export default {
-  props: ["office", "action"],
+  props: ["office", "action", "reset"],
   data() {
     return {};
   },

@@ -58,4 +58,12 @@ class HomeController extends Controller
         $office->delete();
         return \redirect('/adminOnlyPage');
     }
+    public function add(Request $req)
+    {
+        $office = new Office();
+        $office->office_name = $req->office_name;
+        $office->code = $req->code;
+        $office->save();
+        return \redirect('/adminOnlyPage');
+    }
 }

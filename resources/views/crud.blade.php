@@ -1,4 +1,3 @@
-
 @extends('adminlte::page')
 
 @section('title', 'office')
@@ -6,8 +5,8 @@
 @section('content')
 
 <div id="app">
-    <office :office="office" :action="action"></office>
-
+    <office :office="office" :action="action" :reset="reset"></office>
+    <button @click="officeClicked({},'add')" type="button" class="btn btn-success btn-sm float-right mb-2">ADD</i></button>
     <table class="table table-hover table-bordered table-striped">
         <thead class="thead-dark ">
             <tr>

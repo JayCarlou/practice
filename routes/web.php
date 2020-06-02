@@ -51,8 +51,9 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function (
     //Route::get('/adminOnlyPage','HomeController@admin');
 });
 
-// delete edit office
+// crud office
 Route::get('/office/edit', 'HomeController@edit');
 Route::get('/office/delete', 'HomeController@delete');
+Route::get('/office/add', 'HomeController@add');
 
 Route::get('/unauthorized', 'HomeController@unauthorized')->name('unauthorized');

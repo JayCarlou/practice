@@ -34,16 +34,24 @@ const app = new Vue({
     el: '#app',
     data() {
         return {
-            office: "",
+            office: {
+                name: "",
+                code: "",
+            },
             action: "",
         }
     },
     methods: {
         officeClicked(office, action) {
             console.log(office, action);
-            this.office = office;
+            if (action != 'add')
+                this.office = office;
             this.action = action;
             $('#myModal').modal('show')
         },
+        //reset data if close ng modal
+        reset() {
+            Object.assign(this.$data, this.$options.data.apply(this));
+        }
     }
 });

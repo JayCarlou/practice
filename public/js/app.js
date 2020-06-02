@@ -1967,8 +1967,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["office", "action"],
+  props: ["office", "action", "reset"],
   data: function data() {
     return {};
   },
@@ -37538,7 +37547,8 @@ var render = function() {
                 "button",
                 {
                   staticClass: "close",
-                  attrs: { type: "button", "data-dismiss": "modal" }
+                  attrs: { type: "button", "data-dismiss": "modal" },
+                  on: { click: _vm.reset }
                 },
                 [_vm._v("×")]
               )
@@ -37588,7 +37598,9 @@ var render = function() {
                         type: "number",
                         name: "code",
                         id: "code",
-                        disabled: _vm.action == "delete"
+                        disabled: _vm.action == "delete",
+                        required: "",
+                        autocomplete: "off"
                       },
                       domProps: { value: _vm.office.code },
                       on: {
@@ -37621,7 +37633,9 @@ var render = function() {
                         type: "text",
                         id: "office_name",
                         name: "office_name",
-                        disabled: _vm.action == "delete"
+                        disabled: _vm.action == "delete",
+                        required: "",
+                        autocomplete: "off"
                       },
                       domProps: { value: _vm.office.office_name },
                       on: {
@@ -37648,13 +37662,22 @@ var render = function() {
                         },
                         [_vm._v("Submit")]
                       )
-                    : _c(
+                    : _vm.action == "delete"
+                    ? _c(
                         "button",
                         {
                           staticClass: "btn btn-danger float-right",
                           attrs: { type: "submit" }
                         },
                         [_vm._v("Delete")]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-right",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Add")]
                       )
                 ]
               )
@@ -49873,16 +49896,23 @@ var app = new Vue({
   el: '#app',
   data: function data() {
     return {
-      office: "",
+      office: {
+        name: "",
+        code: ""
+      },
       action: ""
     };
   },
   methods: {
     officeClicked: function officeClicked(office, action) {
       console.log(office, action);
-      this.office = office;
+      if (action != 'add') this.office = office;
       this.action = action;
       $('#myModal').modal('show');
+    },
+    //reset data if close ng modal
+    reset: function reset() {
+      Object.assign(this.$data, this.$options.data.apply(this));
     }
   }
 });
